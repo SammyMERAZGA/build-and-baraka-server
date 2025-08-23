@@ -37,7 +37,9 @@ export class UsersService {
     });
 
     if (existingUser) {
-      throw new ConflictException('User with this email already exists');
+      throw new ConflictException(
+        'Un utilisateur avec cette adresse email existe déjà',
+      );
     }
 
     // Hash password
@@ -72,13 +74,13 @@ export class UsersService {
     });
 
     if (!user) {
-      throw new UnauthorizedException('Invalid credentials');
+      throw new UnauthorizedException('Identifiants invalides');
     }
 
     // Verify password
     const isPasswordValid = await bcrypt.compare(password, user.password);
     if (!isPasswordValid) {
-      throw new UnauthorizedException('Invalid credentials');
+      throw new UnauthorizedException('Identifiants invalides');
     }
 
     // Generate JWT token
@@ -103,7 +105,8 @@ export class UsersService {
     if (!user) {
       // Don't reveal if email exists or not for security
       return {
-        message: 'If this email exists, a password reset link has been sent',
+        message:
+          'Si cette adresse email existe, un code de réinitialisation a été envoyé',
       };
     }
 
@@ -128,7 +131,8 @@ export class UsersService {
     await this.mailService.sendPasswordResetEmail(email, otpCode);
 
     return {
-      message: 'If this email exists, a password reset code has been sent',
+      message:
+        'Si cette adresse email existe, un code de réinitialisation a été envoyé',
     };
   }
 
@@ -146,7 +150,9 @@ export class UsersService {
     });
 
     if (!user) {
-      throw new BadRequestException('Invalid email or no reset request found');
+      throw new BadRequestException(
+        'Email invalide ou aucune demande de réinitialisation trouvée',
+      );
     }
 
     // Verify OTP code with speakeasy
@@ -160,10 +166,10 @@ export class UsersService {
     });
 
     if (!isValidToken) {
-      throw new BadRequestException('Invalid or expired OTP code');
+      throw new BadRequestException('Code OTP invalide ou expiré');
     }
 
-    return { message: 'OTP code is valid', valid: true };
+    return { message: 'Le code OTP est valide', valid: true };
   }
 
   async resetPassword(
@@ -180,7 +186,9 @@ export class UsersService {
     });
 
     if (!user) {
-      throw new BadRequestException('Invalid email or no reset request found');
+      throw new BadRequestException(
+        'Email invalide ou aucune demande de réinitialisation trouvée',
+      );
     }
 
     // Verify OTP code with speakeasy
@@ -194,14 +202,14 @@ export class UsersService {
     });
 
     if (!isValidToken) {
-      throw new BadRequestException('Invalid or expired OTP code');
+      throw new BadRequestException('Code OTP invalide ou expiré');
     }
 
     // Check if new password is the same as current password
     const isSamePassword = await bcrypt.compare(newPassword, user.password);
     if (isSamePassword) {
       throw new BadRequestException(
-        'New password must be different from your current password',
+        'Le nouveau mot de passe doit être différent de votre mot de passe actuel',
       );
     }
 
@@ -222,7 +230,7 @@ export class UsersService {
     // Send confirmation email
     await this.mailService.sendPasswordChangeConfirmationEmail(email);
 
-    return { message: 'Password has been successfully reset' };
+    return { message: 'Le mot de passe a été réinitialisé avec succès' };
   }
 
   async getProfile(userUuid: string): Promise<UserResponseDto> {
@@ -231,7 +239,7 @@ export class UsersService {
     });
 
     if (!user) {
-      throw new NotFoundException('User not found');
+      throw new NotFoundException('Utilisateur non trouvé');
     }
 
     return new UserResponseDto(user);
@@ -250,7 +258,7 @@ export class UsersService {
       });
 
       if (existingUser && existingUser.uuid !== userUuid) {
-        throw new ConflictException('Email is already taken');
+        throw new ConflictException('Cette adresse email est déjà utilisée');
       }
     }
 
@@ -276,7 +284,7 @@ export class UsersService {
     });
 
     if (!user) {
-      throw new NotFoundException('User not found');
+      throw new NotFoundException('Utilisateur non trouvé');
     }
 
     // Verify current password
@@ -285,14 +293,14 @@ export class UsersService {
       user.password,
     );
     if (!isCurrentPasswordValid) {
-      throw new UnauthorizedException('Current password is incorrect');
+      throw new UnauthorizedException('Le mot de passe actuel est incorrect');
     }
 
     // Check if new password is the same as current password
     const isSamePassword = await bcrypt.compare(newPassword, user.password);
     if (isSamePassword) {
       throw new BadRequestException(
-        'New password must be different from your current password',
+        'Le nouveau mot de passe doit être différent de votre mot de passe actuel',
       );
     }
 
@@ -306,7 +314,7 @@ export class UsersService {
       data: { password: hashedPassword },
     });
 
-    return { message: 'Password has been successfully changed' };
+    return { message: 'Le mot de passe a été modifié avec succès' };
   }
 
   async deleteAccount(userUuid: string): Promise<{ message: string }> {
@@ -315,7 +323,7 @@ export class UsersService {
     });
 
     if (!user) {
-      throw new NotFoundException('User not found');
+      throw new NotFoundException('Utilisateur non trouvé');
     }
 
     // Delete user (cascade will handle related records)
@@ -323,6 +331,6 @@ export class UsersService {
       where: { uuid: userUuid },
     });
 
-    return { message: 'Account has been successfully deleted' };
+    return { message: 'Le compte a été supprimé avec succès' };
   }
 }

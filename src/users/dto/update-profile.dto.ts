@@ -10,45 +10,51 @@ import {
 
 export class UpdateProfileDto {
   @ApiProperty({
-    description: 'New email address',
-    example: 'newemail@example.com',
+    description: 'Nouvelle adresse email',
+    example: 'nouveauemail@exemple.com',
     required: false,
   })
   @IsOptional()
-  @IsEmail({}, { message: 'Please provide a valid email address' })
-  @Matches(/^[^\s@]+@[^\s@]+\.[^\s@]+$/, { message: 'Invalid email format' })
+  @IsEmail({}, { message: 'Veuillez fournir une adresse email valide' })
+  @Matches(/^[^\s@]+@[^\s@]+\.[^\s@]+$/, { message: "Format d'email invalide" })
   @Matches(
     /^(?!.*@(yopmail|10minutemail|guerrillamail|mailinator|tempmail)\.)/i,
     {
-      message: 'Temporary email addresses are not allowed',
+      message: 'Les adresses email temporaires ne sont pas autorisées',
     },
   )
   email?: string;
 
   @ApiProperty({
-    description: 'Newsletter subscription preference',
+    description: "Préférence d'abonnement à la newsletter",
     example: true,
     required: false,
   })
   @IsOptional()
-  @IsBoolean()
+  @IsBoolean({ message: "L'abonnement newsletter doit être un booléen" })
   newsletterSubscribed?: boolean;
 }
 
 export class ChangePasswordDto {
   @ApiProperty({
-    description: 'Current password',
-    example: 'mycurrentpassword',
+    description: 'Mot de passe actuel',
+    example: 'monmotdepasseactuel',
   })
-  @IsString()
+  @IsString({
+    message: 'Le mot de passe actuel doit être une chaîne de caractères',
+  })
   currentPassword: string;
 
   @ApiProperty({
-    description: 'New password',
-    example: 'mynewpassword123',
+    description: 'Nouveau mot de passe',
+    example: 'monnouveaumotdepasse123',
     minLength: 8,
   })
-  @IsString()
-  @MinLength(8, { message: 'Password must be at least 8 characters long' })
+  @IsString({
+    message: 'Le nouveau mot de passe doit être une chaîne de caractères',
+  })
+  @MinLength(8, {
+    message: 'Le mot de passe doit contenir au moins 8 caractères',
+  })
   newPassword: string;
 }

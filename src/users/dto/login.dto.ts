@@ -3,16 +3,16 @@ import { IsEmail, IsString } from 'class-validator';
 
 export class LoginDto {
   @ApiProperty({
-    description: 'Email address of the user',
-    example: 'user@example.com',
+    description: "Adresse email de l'utilisateur",
+    example: 'utilisateur@exemple.com',
   })
-  @IsEmail({}, { message: 'Please provide a valid email address' })
+  @IsEmail({}, { message: 'Veuillez fournir une adresse email valide' })
   email: string;
 
   @ApiProperty({
-    description: 'Password for the user account',
-    example: 'MySecurePassword123!',
+    description: 'Mot de passe du compte utilisateur',
+    example: 'MonMotDePasseSecurise123!',
   })
-  @IsString()
+  @IsString({ message: 'Le mot de passe doit être une chaîne de caractères' })
   password: string;
 }

@@ -3,9 +3,9 @@ import { IsEmail } from 'class-validator';
 
 export class ForgotPasswordDto {
   @ApiProperty({
-    description: 'Email address to send password reset OTP code',
-    example: 'user@example.com',
+    description: 'Adresse email pour envoyer le code OTP de réinitialisation',
+    example: 'utilisateur@exemple.com',
   })
-  @IsEmail({}, { message: 'Please provide a valid email address' })
+  @IsEmail({}, { message: 'Veuillez fournir une adresse email valide' })
   email: string;
 }
