@@ -1,0 +1,153 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  uuid                 String   @id @default(uuid())
+  email                String   @unique
+  password             String
+  newsletterSubscribed Boolean  @default(false) @map("newsletter_subscribed")
+  isResettingPassword  Boolean  @default(false) @map("is_resetting_password")
+  passwordResetToken   String?  @map("password_reset_token")
+  createdAt            DateTime @default(now()) @map("created_at")
+  updatedAt            DateTime @updatedAt @map("updated_at")
+
+  // Relations
+  feedback        Feedback[]
+  duaFavorites    DuaFavorites[]
+  recipeFavorites RecipeFavorites[]
+
+  @@map("user")
+}
+
+model Feedback {
+  uuid      String   @id @default(uuid())
+  type      String
+  comment   String
+  createdAt DateTime @default(now()) @map("created_at")
+
+  // Foreign keys
+  userUuid String @map("user_uuid")
+
+  // Relations
+  user User @relation(fields: [userUuid], references: [uuid], onDelete: Cascade)
+
+  @@map("feedback")
+}
+
+model DuaCategory {
+  uuid      String   @id @default(uuid())
+  name      String
+  color     String?
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
+
+  // Relations
+  duas Dua[]
+
+  @@map("dua_category")
+}
+
+model Dua {
+  uuid            String   @id @default(uuid())
+  title           String
+  image           String?
+  arabic          String
+  transliteration String
+  translation     String
+  reference       String
+  color           String?
+  createdAt       DateTime @default(now()) @map("created_at")
+  updatedAt       DateTime @updatedAt @map("updated_at")
+
+  // Foreign keys
+  duaCategoryUuid String @map("dua_category_uuid")
+
+  // Relations
+  duaCategory  DuaCategory    @relation(fields: [duaCategoryUuid], references: [uuid], onDelete: Cascade)
+  duaFavorites DuaFavorites[]
+
+  @@map("dua")
+}
+
+model DuaFavorites {
+  uuid      String   @id @default(uuid())
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
+
+  // Foreign keys
+  userUuid String @map("user_uuid")
+  duaUuid  String @map("dua_uuid")
+
+  // Relations
+  user User @relation(fields: [userUuid], references: [uuid], onDelete: Cascade)
+  dua  Dua  @relation(fields: [duaUuid], references: [uuid], onDelete: Cascade)
+
+  @@unique([userUuid, duaUuid])
+  @@map("dua_favorites")
+}
+
+model RecipeCategory {
+  uuid      String   @id @default(uuid())
+  name      String
+  color     String?
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
+
+  // Relations
+  recipes Recipe[]
+
+  @@map("recipe_category")
+}
+
+model Recipe {
+  uuid         String   @id @default(uuid())
+  name         String
+  arabicName   String?  @map("arabic_name")
+  description  String   @db.Text
+  ingredients  String   @db.Text
+  preparations String   @db.Text
+  hadithSource String?  @map("hadith_source")
+  hadithText   String?  @map("hadith_text") @db.Text
+  usage        String?
+  icon         String?
+  createdAt    DateTime @default(now()) @map("created_at")
+  updatedAt    DateTime @updatedAt @map("updated_at")
+
+  // Foreign keys
+  recipeCategoryUuid String @map("recipe_category_uuid")
+
+  // Relations
+  recipeCategory  RecipeCategory    @relation(fields: [recipeCategoryUuid], references: [uuid], onDelete: Cascade)
+  recipeFavorites RecipeFavorites[]
+
+  @@map("recipe")
+}
+
+model RecipeFavorites {
+  uuid      String   @id @default(uuid())
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
+
+  // Foreign keys
+  userUuid   String @map("user_uuid")
+  recipeUuid String @map("recipe_uuid")
+
+  // Relations
+  user   User   @relation(fields: [userUuid], references: [uuid], onDelete: Cascade)
+  recipe Recipe @relation(fields: [recipeUuid], references: [uuid], onDelete: Cascade)
+
+  @@unique([userUuid, recipeUuid])
+  @@map("recipe_favorites")
+}
