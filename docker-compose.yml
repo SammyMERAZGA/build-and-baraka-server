@@ -48,7 +48,7 @@ services:
       POSTGRES_DB: buildbaraka
       POSTGRES_INITDB_ARGS: '--auth-host=scram-sha-256 --auth-local=scram-sha-256'
     ports:
-      - '127.0.0.1:5432:5432' # ✅ LOCAL ONLY - pour DBeaver
+      - '127.0.0.1:5433:5432' # ✅ LOCAL ONLY - port 5433 pour éviter conflit
     volumes:
       - pgdata:/var/lib/postgresql/data
     networks:
