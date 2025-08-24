@@ -5,6 +5,7 @@ import { UsersModule } from './users/users.module';
 import { PrismaModule } from './prisma/prisma.module';
 import { MailModule } from './mail/mail.module';
 import { FeedbackModule } from './feedback/feedback.module';
+import { DuaCategoryModule } from './dua-category/dua-category.module';
 import { JwtAuthGuard } from './auth/guards/jwt-auth.guard';
 
 @Module({
@@ -16,6 +17,7 @@ import { JwtAuthGuard } from './auth/guards/jwt-auth.guard';
     MailModule,
     UsersModule,
     FeedbackModule,
+    DuaCategoryModule,
   ],
   providers: [
     {

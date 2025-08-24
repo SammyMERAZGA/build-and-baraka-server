@@ -1,0 +1,77 @@
+networks:
+  build-and-baraka-network:
+    driver: bridge
+    internal: false
+
+services:
+  backend:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: build-and-baraka-backend
+    restart: unless-stopped
+    env_file:
+      - .env
+    ports:
+      - '127.0.0.1:4001:4001'
+    networks:
+      - build-and-baraka-network:
+    depends_on:
+      db:
+        condition: service_healthy
+    healthcheck:
+      test: ['CMD', 'curl', '-f', 'http://localhost:4001/']
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s
+    security_opt:
+      - no-new-privileges:true
+    cap_drop:
+      - ALL
+    cap_add:
+      - CHOWN
+      - DAC_OVERRIDE
+      - SETGID
+      - SETUID
+    read_only: false
+    tmpfs:
+      - /tmp
+
+  db:
+    image: postgres:15-alpine
+    container_name: build-and-baraka-postgres
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: user
+      POSTGRES_PASSWORD: sp@Ut733@Cpa
+      POSTGRES_DB: buildandbaraka
+      POSTGRES_INITDB_ARGS: '--auth-host=scram-sha-256 --auth-local=scram-sha-256'
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    networks:
+      - build-and-baraka-network
+    healthcheck:
+      test: ['CMD-SHELL', 'pg_isready -U user -d scrumizy']
+      interval: 30s
+      timeout: 10s
+      retries: 5
+      start_period: 30s
+    security_opt:
+      - no-new-privileges:true
+    cap_drop:
+      - ALL
+    cap_add:
+      - CHOWN
+      - DAC_OVERRIDE
+      - FOWNER
+      - SETGID
+      - SETUID
+    read_only: false
+    tmpfs:
+      - /tmp
+      - /var/run/postgresql
+
+volumes:
+  pgdata:
+    driver: local
