@@ -1,5 +1,7 @@
+version: '3.9'
+
 networks:
-  build-and-baraka-network:
+  buildbaraka-network:
     driver: bridge
     internal: false
 
@@ -8,14 +10,14 @@ services:
     build:
       context: .
       dockerfile: Dockerfile
-    container_name: build-and-baraka-backend
+    container_name: buildbaraka-backend
     restart: unless-stopped
     env_file:
       - .env
     ports:
-      - '127.0.0.1:4001:4001'
+      - '127.0.0.1:4001:4001' # ✅ LOCAL ONLY
     networks:
-      - build-and-baraka-network:
+      - buildbaraka-network
     depends_on:
       db:
         condition: service_healthy
@@ -40,19 +42,19 @@ services:
 
   db:
     image: postgres:15-alpine
-    container_name: build-and-baraka-postgres
+    container_name: buildbaraka-postgres
     restart: unless-stopped
     environment:
       POSTGRES_USER: user
       POSTGRES_PASSWORD: sp@Ut733@Cpa
-      POSTGRES_DB: buildandbaraka
+      POSTGRES_DB: buildbaraka
       POSTGRES_INITDB_ARGS: '--auth-host=scram-sha-256 --auth-local=scram-sha-256'
     volumes:
       - pgdata:/var/lib/postgresql/data
     networks:
-      - build-and-baraka-network
+      - buildbaraka-network
     healthcheck:
-      test: ['CMD-SHELL', 'pg_isready -U user -d scrumizy']
+      test: ['CMD-SHELL', 'pg_isready -U user -d buildbaraka']
       interval: 30s
       timeout: 10s
       retries: 5
