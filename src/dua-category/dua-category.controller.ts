@@ -6,19 +6,12 @@ import {
   Patch,
   Param,
   Delete,
-  UseGuards,
   HttpCode,
   HttpStatus,
 } from '@nestjs/common';
-import {
-  ApiTags,
-  ApiOperation,
-  ApiResponse,
-  ApiBearerAuth,
-  ApiParam,
-} from '@nestjs/swagger';
+import { ApiTags, ApiOperation, ApiResponse, ApiParam } from '@nestjs/swagger';
+import { Public } from '../auth/decorators/public.decorator';
 import { DuaCategoryService } from './dua-category.service';
-import { JwtAuthGuard } from '../auth/guards/jwt-auth.guard';
 import {
   CreateDuaCategoryDto,
   UpdateDuaCategoryDto,
@@ -27,8 +20,7 @@ import {
 
 @ApiTags('Catégories de Duas')
 @Controller('dua-categories')
-@UseGuards(JwtAuthGuard)
-@ApiBearerAuth()
+@Public()
 export class DuaCategoryController {
   constructor(private readonly duaCategoryService: DuaCategoryService) {}
 
@@ -46,10 +38,6 @@ export class DuaCategoryController {
   @ApiResponse({
     status: 400,
     description: "Données d'entrée invalides",
-  })
-  @ApiResponse({
-    status: 401,
-    description: 'Non autorisé - Token JWT invalide ou manquant',
   })
   @ApiResponse({
     status: 409,
@@ -71,10 +59,6 @@ export class DuaCategoryController {
     description: 'Liste des catégories récupérée avec succès',
     type: [DuaCategoryResponseDto],
   })
-  @ApiResponse({
-    status: 401,
-    description: 'Non autorisé - Token JWT invalide ou manquant',
-  })
   async findAll(): Promise<DuaCategoryResponseDto[]> {
     return this.duaCategoryService.findAll();
   }
@@ -93,10 +77,6 @@ export class DuaCategoryController {
     status: 200,
     description: 'Catégorie récupérée avec succès',
     type: DuaCategoryResponseDto,
-  })
-  @ApiResponse({
-    status: 401,
-    description: 'Non autorisé - Token JWT invalide ou manquant',
   })
   @ApiResponse({
     status: 404,
@@ -124,10 +104,6 @@ export class DuaCategoryController {
   @ApiResponse({
     status: 400,
     description: "Données d'entrée invalides",
-  })
-  @ApiResponse({
-    status: 401,
-    description: 'Non autorisé - Token JWT invalide ou manquant',
   })
   @ApiResponse({
     status: 404,
@@ -158,10 +134,6 @@ export class DuaCategoryController {
   @ApiResponse({
     status: 204,
     description: 'Catégorie supprimée avec succès',
-  })
-  @ApiResponse({
-    status: 401,
-    description: 'Non autorisé - Token JWT invalide ou manquant',
   })
   @ApiResponse({
     status: 404,

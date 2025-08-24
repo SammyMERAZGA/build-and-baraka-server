@@ -36,17 +36,4 @@ export class FeedbackService {
 
     return new FeedbackResponseDto(feedback);
   }
-
-  async findAll(): Promise<FeedbackResponseDto[]> {
-    const feedbacks = await this.prisma.feedback.findMany({
-      include: {
-        user: true,
-      },
-      orderBy: {
-        createdAt: 'desc',
-      },
-    });
-
-    return feedbacks.map((feedback) => new FeedbackResponseDto(feedback));
-  }
 }

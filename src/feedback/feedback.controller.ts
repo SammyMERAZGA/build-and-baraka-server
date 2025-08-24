@@ -1,6 +1,5 @@
 import {
   Controller,
-  Get,
   Post,
   Body,
   UseGuards,
@@ -56,25 +55,5 @@ export class FeedbackController {
     @Body() createFeedbackDto: CreateFeedbackDto,
   ): Promise<FeedbackResponseDto> {
     return this.feedbackService.create(user.uuid, createFeedbackDto);
-  }
-
-  @Get()
-  @ApiBearerAuth()
-  @ApiOperation({
-    summary: 'Récupérer tous les retours utilisateurs',
-    description:
-      'Récupérer tous les retours utilisateurs avec les informations utilisateur (accès admin)',
-  })
-  @ApiResponse({
-    status: 200,
-    description: 'Liste des retours utilisateurs récupérée avec succès',
-    type: [FeedbackResponseDto],
-  })
-  @ApiResponse({
-    status: 401,
-    description: 'Non autorisé - Token JWT invalide ou manquant',
-  })
-  async findAll(): Promise<FeedbackResponseDto[]> {
-    return this.feedbackService.findAll();
   }
 }

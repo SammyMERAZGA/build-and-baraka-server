@@ -6,6 +6,8 @@ import { PrismaModule } from './prisma/prisma.module';
 import { MailModule } from './mail/mail.module';
 import { FeedbackModule } from './feedback/feedback.module';
 import { DuaCategoryModule } from './dua-category/dua-category.module';
+import { DuaModule } from './dua/dua.module';
+import { DuaFavoritesModule } from './dua-favorites/dua-favorites.module';
 import { JwtAuthGuard } from './auth/guards/jwt-auth.guard';
 
 @Module({
@@ -18,6 +20,8 @@ import { JwtAuthGuard } from './auth/guards/jwt-auth.guard';
     UsersModule,
     FeedbackModule,
     DuaCategoryModule,
+    DuaModule,
+    DuaFavoritesModule,
   ],
   providers: [
     {
