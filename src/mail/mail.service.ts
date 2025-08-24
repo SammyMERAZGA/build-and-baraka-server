@@ -74,17 +74,17 @@ export class MailService {
             * { margin: 0; padding: 0; box-sizing: border-box; }
             body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); padding: 20px; }
             .container { max-width: 600px; margin: 0 auto; background: white; border-radius: 20px; overflow: hidden; box-shadow: 0 20px 40px rgba(0,0,0,0.1); }
-            .header { background: linear-gradient(135deg, #2E8B57 0%, #228B22 100%); padding: 40px 30px; text-align: center; color: white; }
+            .header { background: linear-gradient(135deg, #00a1a7 0%, #008b91 100%); padding: 40px 30px; text-align: center; color: white; }
             .logo { font-size: 32px; font-weight: bold; margin-bottom: 10px; }
             .subtitle { font-size: 16px; opacity: 0.9; }
             .content { padding: 40px 30px; }
-            .greeting { font-size: 24px; color: #2E8B57; margin-bottom: 20px; font-weight: 600; }
+            .greeting { font-size: 24px; color: #00a1a7; margin-bottom: 20px; font-weight: 600; }
             .message { font-size: 16px; line-height: 1.6; color: #555; margin-bottom: 30px; }
-            .otp-code { display: inline-block; background: linear-gradient(135deg, #2E8B57 0%, #228B22 100%); color: white; padding: 20px 40px; font-size: 32px; font-weight: bold; letter-spacing: 8px; border-radius: 15px; margin: 30px 0; font-family: 'Courier New', monospace; box-shadow: 0 8px 16px rgba(46, 139, 87, 0.3); }
-            .security-note { background: #f8f9fa; border-left: 4px solid #2E8B57; padding: 20px; margin: 30px 0; border-radius: 0 10px 10px 0; }
+            .otp-code { display: inline-block; background: linear-gradient(135deg, #00a1a7 0%, #008b91 100%); color: white; padding: 20px 40px; font-size: 32px; font-weight: bold; letter-spacing: 8px; border-radius: 15px; margin: 30px 0; font-family: 'Courier New', monospace; box-shadow: 0 8px 16px rgba(0, 161, 167, 0.3); }
+            .security-note { background: #f8f9fa; border-left: 4px solid #00a1a7; padding: 20px; margin: 30px 0; border-radius: 0 10px 10px 0; }
             .footer { background: #f8f9fa; padding: 30px; text-align: center; color: #666; font-size: 14px; }
-            .islamic-decoration { font-size: 24px; color: #2E8B57; margin: 20px 0; }
-            .verse { font-style: italic; color: #2E8B57; margin: 20px 0; padding: 15px; background: #f0f8f0; border-radius: 10px; }
+            .islamic-decoration { font-size: 24px; color: #00a1a7; margin: 20px 0; }
+            .verse { font-style: italic; color: #00a1a7; margin: 20px 0; padding: 15px; background: #e6f7f8; border-radius: 10px; }
         </style>
     </head>
     <body>
@@ -173,17 +173,17 @@ export class MailService {
             * { margin: 0; padding: 0; box-sizing: border-box; }
             body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); padding: 20px; }
             .container { max-width: 600px; margin: 0 auto; background: white; border-radius: 20px; overflow: hidden; box-shadow: 0 20px 40px rgba(0,0,0,0.1); }
-            .header { background: linear-gradient(135deg, #28a745 0%, #20c997 100%); padding: 40px 30px; text-align: center; color: white; }
+            .header { background: linear-gradient(135deg, #00a1a7 0%, #008b91 100%); padding: 40px 30px; text-align: center; color: white; }
             .logo { font-size: 32px; font-weight: bold; margin-bottom: 10px; }
             .subtitle { font-size: 16px; opacity: 0.9; }
             .content { padding: 40px 30px; }
-            .greeting { font-size: 24px; color: #28a745; margin-bottom: 20px; font-weight: 600; }
+            .greeting { font-size: 24px; color: #00a1a7; margin-bottom: 20px; font-weight: 600; }
             .message { font-size: 16px; line-height: 1.6; color: #555; margin-bottom: 30px; }
             .success-icon { font-size: 64px; text-align: center; margin: 30px 0; }
-            .security-note { background: #d4edda; border-left: 4px solid #28a745; padding: 20px; margin: 30px 0; border-radius: 0 10px 10px 0; }
+            .security-note { background: #e6f7f8; border-left: 4px solid #00a1a7; padding: 20px; margin: 30px 0; border-radius: 0 10px 10px 0; }
             .footer { background: #f8f9fa; padding: 30px; text-align: center; color: #666; font-size: 14px; }
-            .islamic-decoration { font-size: 24px; color: #28a745; margin: 20px 0; }
-            .verse { font-style: italic; color: #28a745; margin: 20px 0; padding: 15px; background: #d4edda; border-radius: 10px; }
+            .islamic-decoration { font-size: 24px; color: #00a1a7; margin: 20px 0; }
+            .verse { font-style: italic; color: #00a1a7; margin: 20px 0; padding: 15px; background: #e6f7f8; border-radius: 10px; }
             .date-info { background: #f8f9fa; padding: 15px; border-radius: 10px; margin: 20px 0; text-align: center; font-weight: 600; color: #495057; }
         </style>
     </head>

@@ -112,18 +112,18 @@ model RecipeCategory {
 }
 
 model Recipe {
-  uuid         String   @id @default(uuid())
+  uuid         String    @id @default(uuid())
   name         String
-  arabicName   String?  @map("arabic_name")
-  description  String   @db.Text
-  ingredients  String   @db.Text
-  preparations String   @db.Text
-  hadithSource String?  @map("hadith_source")
-  hadithText   String?  @map("hadith_text") @db.Text
-  usage        String?
+  arabicName   String?   @map("arabic_name")
+  description  String    @db.Text
+  ingredients  String[]
+  preparations String[]
+  hadithSource String?   @map("hadith_source")
+  hadithText   String?   @map("hadith_text") @db.Text
+  usage        String[]
   icon         String?
-  createdAt    DateTime @default(now()) @map("created_at")
-  updatedAt    DateTime @updatedAt @map("updated_at")
+  createdAt    DateTime  @default(now()) @map("created_at")
+  updatedAt    DateTime  @updatedAt @map("updated_at")
 
   // Foreign keys
   recipeCategoryUuid String @map("recipe_category_uuid")
