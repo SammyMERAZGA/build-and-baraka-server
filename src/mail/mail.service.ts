@@ -247,4 +247,142 @@ export class MailService {
     </html>
     `;
   }
+
+  async sendContactNotificationEmail(
+    senderEmail: string,
+    subject: string,
+    message: string,
+  ): Promise<void> {
+    const htmlContent = this.getContactNotificationTemplate(
+      senderEmail,
+      subject,
+      message,
+    );
+
+    try {
+      await this.transporter.sendMail({
+        from: this.configService.get('MAIL_FROM'),
+        to: 'contact@buildbaraka.com',
+        cc: 'smy.merazga@gmail.com',
+        subject: `📧 Nouveau contact - ${subject}`,
+        html: htmlContent,
+        replyTo: senderEmail,
+      });
+
+      this.logger.log(`Contact notification email sent from ${senderEmail}`);
+    } catch (error) {
+      this.logger.error(
+        `Failed to send contact notification email from ${senderEmail}`,
+        error,
+      );
+      throw new Error('Failed to send contact notification email');
+    }
+  }
+
+  private getContactNotificationTemplate(
+    senderEmail: string,
+    subject: string,
+    message: string,
+  ): string {
+    const currentDate = new Date().toLocaleDateString('fr-FR', {
+      weekday: 'long',
+      year: 'numeric',
+      month: 'long',
+      day: 'numeric',
+      hour: '2-digit',
+      minute: '2-digit',
+    });
+
+    return `
+    <!DOCTYPE html>
+    <html lang="fr" dir="ltr">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Nouveau contact - Build & Baraka</title>
+        <style>
+            * { margin: 0; padding: 0; box-sizing: border-box; }
+            body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); padding: 20px; }
+            .container { max-width: 600px; margin: 0 auto; background: white; border-radius: 20px; overflow: hidden; box-shadow: 0 20px 40px rgba(0,0,0,0.1); }
+            .header { background: linear-gradient(135deg, #00a1a7 0%, #008b91 100%); padding: 40px 30px; text-align: center; color: white; }
+            .logo { font-size: 32px; font-weight: bold; margin-bottom: 10px; }
+            .subtitle { font-size: 16px; opacity: 0.9; }
+            .content { padding: 40px 30px; }
+            .greeting { font-size: 24px; color: #00a1a7; margin-bottom: 20px; font-weight: 600; }
+            .message { font-size: 16px; line-height: 1.6; color: #555; margin-bottom: 30px; }
+            .contact-info { background: #e6f7f8; border-left: 4px solid #00a1a7; padding: 20px; margin: 30px 0; border-radius: 0 10px 10px 0; }
+            .contact-message { background: #f8f9fa; padding: 20px; border-radius: 10px; margin: 20px 0; border: 1px solid #dee2e6; }
+            .footer { background: #f8f9fa; padding: 30px; text-align: center; color: #666; font-size: 14px; }
+            .islamic-decoration { font-size: 24px; color: #00a1a7; margin: 20px 0; }
+            .date-info { background: #f8f9fa; padding: 15px; border-radius: 10px; margin: 20px 0; text-align: center; font-weight: 600; color: #495057; }
+            .reply-button { display: inline-block; background: linear-gradient(135deg, #00a1a7 0%, #008b91 100%); color: white; padding: 15px 30px; text-decoration: none; border-radius: 10px; margin: 20px 0; font-weight: 600; }
+        </style>
+    </head>
+    <body>
+        <div class="container">
+            <div class="header">
+                <div class="logo">🕌 Build & Baraka</div>
+                <div class="subtitle">Nouveau message de contact</div>
+            </div>
+            
+            <div class="content">
+                <div class="islamic-decoration">بِسْمِ اللَّهِ الرَّحْمَنِ الرَّحِيم</div>
+                
+                <div class="greeting">As-salāmu ʿalaykum 📧</div>
+                
+                <div class="message">
+                    Vous avez reçu un nouveau message de contact depuis votre site vitrine Build & Baraka.
+                </div>
+                
+                <div class="date-info">
+                    📅 Reçu le : ${currentDate}
+                </div>
+                
+                <div class="contact-info">
+                    <strong>📧 Informations du contact :</strong>
+                    <ul style="margin-top: 10px; padding-left: 20px;">
+                        <li><strong>Email :</strong> ${senderEmail}</li>
+                        <li><strong>Motif :</strong> ${subject}</li>
+                    </ul>
+                </div>
+                
+                <div class="contact-message">
+                    <strong>💬 Message :</strong>
+                    <div style="margin-top: 15px; padding: 15px; background: white; border-radius: 8px; border-left: 3px solid #00a1a7;">
+                        ${message.replace(/\n/g, '<br>')}
+                    </div>
+                </div>
+                
+                <div style="text-align: center; margin: 30px 0;">
+                    <a href="mailto:${senderEmail}?subject=Re: ${subject}" class="reply-button">
+                        📧 Répondre directement
+                    </a>
+                </div>
+                
+                <div class="message">
+                    <strong>💡 Actions recommandées :</strong>
+                    <ul style="margin-top: 10px; padding-left: 20px;">
+                        <li>Répondre dans les 24h pour maintenir une bonne relation client</li>
+                        <li>Personnaliser votre réponse selon le motif de contact</li>
+                        <li>Archiver ce message dans votre système de gestion</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="footer">
+                <div class="islamic-decoration">☪️ ✨ 🤲</div>
+                <p><strong>Build & Baraka</strong> - Système de contact automatique</p>
+                <p>Que la paix et les bénédictions d'Allah soient sur vous</p>
+                <br>
+                <p style="font-size: 12px; color: #999;">
+                    Cet email a été généré automatiquement depuis votre site vitrine.
+                    <br>
+                    Contact original : ${senderEmail}
+                </p>
+            </div>
+        </div>
+    </body>
+    </html>
+    `;
+  }
 }

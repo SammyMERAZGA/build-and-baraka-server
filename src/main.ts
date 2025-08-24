@@ -39,29 +39,54 @@ async function bootstrap() {
     'https://www.buildbaraka.com',
   ];
 
-  // CORS
-  app.enableCors({
-    origin: (origin, callback) => {
-      if (!origin) return callback(null, true);
+  // Custom CORS middleware
+  app.use((req, res, next) => {
+    const origin = req.headers.origin;
 
-      if (allowedOrigins.includes(origin)) {
-        callback(null, true);
-      } else {
-        callback(new Error('Not allowed by CORS'), false);
+    // Check if origin is allowed
+    let isAllowed = false;
+
+    if (!origin) {
+      // Allow requests with no origin (Postman, mobile apps, etc.)
+      isAllowed = true;
+    } else if (process.env.NODE_ENV === 'development') {
+      // In development, allow localhost origins
+      if (origin.includes('localhost') || origin.includes('127.0.0.1')) {
+        isAllowed = true;
       }
-    },
+    }
+
+    if (!isAllowed && allowedOrigins.includes(origin)) {
+      isAllowed = true;
+    }
+
+    if (isAllowed) {
+      res.header('Access-Control-Allow-Origin', origin || '*');
+      res.header('Access-Control-Allow-Credentials', 'true');
+      res.header(
+        'Access-Control-Allow-Methods',
+        'GET,POST,PUT,PATCH,DELETE,OPTIONS',
+      );
+      res.header(
+        'Access-Control-Allow-Headers',
+        'Origin,X-Requested-With,Content-Type,Accept,Authorization,Cache-Control',
+      );
+      res.header('Access-Control-Expose-Headers', 'X-Total-Count');
+      res.header('Access-Control-Max-Age', '86400');
+    }
+
+    // Handle preflight requests
+    if (req.method === 'OPTIONS') {
+      return res.status(200).end();
+    }
+
+    next();
+  });
+
+  // Enable CORS with simple configuration as fallback
+  app.enableCors({
+    origin: true,
     credentials: true,
-    methods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE', 'OPTIONS'],
-    allowedHeaders: [
-      'Origin',
-      'X-Requested-With',
-      'Content-Type',
-      'Accept',
-      'Authorization',
-      'Cache-Control',
-    ],
-    exposedHeaders: ['X-Total-Count'],
-    maxAge: 86400, // 24 hours
   });
 
   // Global validation pipe

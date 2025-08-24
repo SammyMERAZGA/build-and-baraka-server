@@ -112,18 +112,18 @@ model RecipeCategory {
 }
 
 model Recipe {
-  uuid         String    @id @default(uuid())
+  uuid         String   @id @default(uuid())
   name         String
-  arabicName   String?   @map("arabic_name")
-  description  String    @db.Text
+  arabicName   String?  @map("arabic_name")
+  description  String   @db.Text
   ingredients  String[]
   preparations String[]
-  hadithSource String?   @map("hadith_source")
-  hadithText   String?   @map("hadith_text") @db.Text
+  hadithSource String?  @map("hadith_source")
+  hadithText   String?  @map("hadith_text") @db.Text
   usage        String[]
   icon         String?
-  createdAt    DateTime  @default(now()) @map("created_at")
-  updatedAt    DateTime  @updatedAt @map("updated_at")
+  createdAt    DateTime @default(now()) @map("created_at")
+  updatedAt    DateTime @updatedAt @map("updated_at")
 
   // Foreign keys
   recipeCategoryUuid String @map("recipe_category_uuid")
@@ -150,4 +150,26 @@ model RecipeFavorites {
 
   @@unique([userUuid, recipeUuid])
   @@map("recipe_favorites")
+}
+
+enum ContactSubject {
+  GENERAL_FEEDBACK    @map("general_feedback")
+  SUGGESTION          @map("suggestion")
+  BUG_REPORT          @map("bug_report")
+  IMPROVEMENT         @map("improvement")
+  PARTNERSHIP_REQUEST @map("partnership_request")
+  CONTENT_SUGGESTION  @map("content_suggestion")
+  OTHER               @map("other")
+
+  @@map("contact_subject")
+}
+
+model Contact {
+  uuid      String         @id @default(uuid())
+  email     String
+  subject   ContactSubject
+  message   String         @db.Text
+  createdAt DateTime       @default(now()) @map("created_at")
+
+  @@map("contact")
 }
