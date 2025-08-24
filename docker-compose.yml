@@ -47,6 +47,8 @@ services:
       POSTGRES_PASSWORD: sp@Ut733@Cpa
       POSTGRES_DB: buildbaraka
       POSTGRES_INITDB_ARGS: '--auth-host=scram-sha-256 --auth-local=scram-sha-256'
+    ports:
+      - '127.0.0.1:5432:5432' # ✅ LOCAL ONLY - pour DBeaver
     volumes:
       - pgdata:/var/lib/postgresql/data
     networks:
