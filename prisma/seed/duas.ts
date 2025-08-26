@@ -65,7 +65,7 @@ export async function seedDuas(prisma: PrismaClient) {
         "Au nom d'Allah nous entrons, au nom d'Allah nous sortons, et nous plaçons notre confiance en Allah, notre Seigneur.",
       reference: 'Abou Dawoud',
       color: '#3498db',
-      image: '@/assets/images/duaas/en-entrant-maison.jpg',
+      image: 'en-entrant-maison',
     },
     {
       title: 'En sortant de la maison',
@@ -78,7 +78,7 @@ export async function seedDuas(prisma: PrismaClient) {
         "Au nom d'Allah, je place ma confiance en Allah, et il n'y a de force ni de puissance qu'en Allah.",
       reference: 'Abou Dawoud, At-Tirmidhi',
       color: '#27ae60',
-      image: '@/assets/images/duaas/en-sortant-maison.jpg',
+      image: 'en-sortant-maison',
     },
     {
       title: 'En entrant aux toilettes',
@@ -90,7 +90,7 @@ export async function seedDuas(prisma: PrismaClient) {
         'Ô Allah, je cherche refuge auprès de Toi contre les démons mâles et femelles.',
       reference: 'Al-Bukhari, Muslim',
       color: '#e74c3c',
-      image: '@/assets/images/duaas/entrer-toilettes.jpg',
+      image: 'entrer-toilettes',
     },
     {
       title: 'En sortant des toilettes',
@@ -100,7 +100,7 @@ export async function seedDuas(prisma: PrismaClient) {
       translation: 'Je demande Ton pardon.',
       reference: 'Abou Dawoud, At-Tirmidhi',
       color: '#f39c12',
-      image: '@/assets/images/duaas/sortir-toilettes.jpg',
+      image: 'sortir-toilettes',
     },
     {
       title: 'Avant de dormir',
@@ -110,7 +110,7 @@ export async function seedDuas(prisma: PrismaClient) {
       translation: 'En Ton nom, ô Allah, je meurs et je vis.',
       reference: 'Al-Bukhari',
       color: '#9b59b6',
-      image: '@/assets/images/duaas/avant-dormir.jpg',
+      image: 'avant-dormir',
     },
     {
       title: 'Au réveil',
@@ -123,7 +123,7 @@ export async function seedDuas(prisma: PrismaClient) {
         'Louange à Allah qui nous a redonné la vie après nous avoir fait mourir, et vers Lui est la résurrection.',
       reference: 'Al-Bukhari',
       color: '#16a085',
-      image: '@/assets/images/duaas/au-reveil.jpg',
+      image: 'au-reveil',
     },
     {
       title: 'Avant de manger',
@@ -133,7 +133,7 @@ export async function seedDuas(prisma: PrismaClient) {
       translation: "Au nom d'Allah.",
       reference: 'Abou Dawoud, At-Tirmidhi',
       color: '#2c3e50',
-      image: '@/assets/images/duaas/avant-manger.jpg',
+      image: 'avant-manger',
     },
     {
       title: 'Après avoir mangé',
@@ -146,7 +146,7 @@ export async function seedDuas(prisma: PrismaClient) {
         'Louange à Allah qui nous a nourris, abreuvés et nous a fait musulmans.',
       reference: 'Abou Dawoud, At-Tirmidhi',
       color: '#34495e',
-      image: '@/assets/images/duaas/apres-manger.jpg',
+      image: 'apres-manger',
     },
     {
       title: 'En montant en voiture',
@@ -159,7 +159,7 @@ export async function seedDuas(prisma: PrismaClient) {
         "Gloire à Celui qui a mis ceci à notre service alors que nous n'étions pas capables de les dompter. Et c'est vers notre Seigneur que nous retournerons.",
       reference: 'Abou Dawoud, At-Tirmidhi',
       color: '#8e44ad',
-      image: '@/assets/images/duaas/en-voiture.jpg',
+      image: 'en-voiture',
     },
     {
       title: 'Quand il pleut',
@@ -169,7 +169,7 @@ export async function seedDuas(prisma: PrismaClient) {
       translation: 'Ô Allah, (fais que ce soit) une pluie bénéfique.',
       reference: 'Al-Bukhari',
       color: '#17a2b8',
-      image: '@/assets/images/duaas/pluie.jpg',
+      image: 'pluie',
     },
     {
       title: 'Avant un examen',
@@ -182,7 +182,7 @@ export async function seedDuas(prisma: PrismaClient) {
         "Ô Allah, rien n'est facile sauf ce que Tu rends facile, et Tu rends la tristesse facile si Tu veux.",
       reference: 'Ibn Hibban',
       color: '#3498db',
-      image: '@/assets/images/duaas/avant-examen.jpg',
+      image: 'avant-examen',
     },
     {
       title: 'Pour la concentration dans les études',
@@ -195,7 +195,7 @@ export async function seedDuas(prisma: PrismaClient) {
         "Mon Seigneur, ouvre-moi ma poitrine, facilite-moi ma mission, délie ma langue pour qu'ils comprennent ma parole.",
       reference: 'Coran 20:25-28',
       color: '#2980b9',
-      image: '@/assets/images/duaas/concentration-etudes.jpg',
+      image: 'concentration-etudes',
     },
     {
       title: "En s'habillant",
@@ -208,7 +208,7 @@ export async function seedDuas(prisma: PrismaClient) {
         "Louange à Allah qui m'a vêtu de ceci et me l'a accordé sans force ni puissance de ma part.",
       reference: 'Abou Dawoud, At-Tirmidhi',
       color: '#e67e22',
-      image: '@/assets/images/duaas/en-shabillant.jpg',
+      image: 'en-shabillant',
     },
     {
       title: 'En enlevant ses vêtements',
@@ -218,7 +218,7 @@ export async function seedDuas(prisma: PrismaClient) {
       translation: "Au nom d'Allah.",
       reference: 'At-Tirmidhi',
       color: '#d35400',
-      image: '@/assets/images/duaas/enlever-vetements.jpg',
+      image: 'enlever-vetements',
     },
   ];
 
