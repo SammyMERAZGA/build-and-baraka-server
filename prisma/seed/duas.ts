@@ -220,6 +220,193 @@ export async function seedDuas(prisma: PrismaClient) {
       color: '#d35400',
       image: 'enlever-vetements',
     },
+    // SANTÉ ET DOULEUR
+    {
+      title: 'Contre la douleur',
+      category: 'Santé',
+      arabic:
+        'بِسْمِ اللهِ الَّذِي لَا يَضُرُّ مَعَ اسْمِهِ شَيْءٌ فِي الْأَرْضِ وَلَا فِي السَّمَاءِ وَهُوَ السَّمِيعُ الْعَلِيمُ',
+      transliteration:
+        "Bismi allahi alladhi la yadurru ma'a ismihi shay'un fi al-ard wa la fi as-sama'i wa huwa as-sami'u al-'alim",
+      translation:
+        "Au nom d'Allah avec le Nom duquel rien ne peut nuire sur terre ni dans le ciel, et Il est l'Audient, l'Omniscient.",
+      reference: 'Abou Dawoud, At-Tirmidhi',
+      color: '#e74c3c',
+      image: 'contre-douleur',
+    },
+    {
+      title: 'Pour un malade',
+      category: 'Santé',
+      arabic:
+        'أَسْأَلُ اللهَ الْعَظِيمَ رَبَّ الْعَرْشِ الْعَظِيمِ أَنْ يَشْفِيَكَ',
+      transliteration:
+        "As'alu Allah al-'azim, rabba al-'arshi al-'azim, an yashfiyak",
+      translation:
+        "Je demande à Allah l'Immense, Seigneur du Trône immense, de te guérir.",
+      reference: 'Abou Dawoud, At-Tirmidhi',
+      color: '#c0392b',
+      image: 'pour-un-malade',
+    },
+    // ÉPREUVES ET DIFFICULTÉS
+    {
+      title: 'Face à une épreuve difficile',
+      category: 'Épreuves',
+      arabic: 'حَسْبُنَا اللهُ وَنِعْمَ الْوَكِيلُ',
+      transliteration: "Hasbuna Allah wa ni'ma al-wakil",
+      translation: 'Allah nous suffit, et quel excellent protecteur !',
+      reference: 'Coran 3:173',
+      color: '#8e44ad',
+      image: 'epreuve-difficile',
+    },
+    {
+      title: "Pour surmonter l'anxiété",
+      category: 'Épreuves',
+      arabic:
+        'اللَّهُمَّ إِنِّي أَعُوذُ بِكَ مِنَ الْهَمِّ وَالْحَزَنِ وَالْعَجْزِ وَالْكَسَلِ',
+      transliteration:
+        "Allahumma inni a'udhu bika min al-hammi wal-hazan wal-'ajzi wal-kasal",
+      translation:
+        "Ô Allah, je cherche refuge auprès de Toi contre le souci, la tristesse, l'incapacité et la paresse.",
+      reference: 'Al-Bukhari',
+      color: '#9b59b6',
+      image: 'anxiete',
+    },
+    {
+      title: 'En cas de malheur (Istirja)',
+      category: 'Épreuves',
+      arabic: 'إِنَّا لِلَّهِ وَإِنَّا إِلَيْهِ رَاجِعُونَ',
+      transliteration: "Inna lillahi wa inna ilayhi raji'un",
+      translation:
+        "Nous appartenons à Allah et c'est vers Lui que nous retournons.",
+      reference: 'Coran 2:156',
+      color: '#6f42c1',
+      image: 'malheur',
+    },
+    // CIMETIÈRE ET MORT
+    {
+      title: 'En visitant un cimetière',
+      category: 'Mort',
+      arabic:
+        'السَّلَامُ عَلَيْكُمْ دَارَ قَوْمٍ مُؤْمِنِينَ وَإِنَّا إِنْ شَاءَ اللهُ بِكُمْ لَاحِقُونَ',
+      transliteration:
+        "As-salamu 'alaykum dar qawmin mu'minin wa inna in sha Allah bikum lahiqun",
+      translation:
+        'Que la paix soit sur vous, ô demeure de croyants, et nous vous rejoindrons si Allah le veut.',
+      reference: 'Muslim',
+      color: '#2c3e50',
+      image: 'cimetiere',
+    },
+    {
+      title: 'Pour un mort (janaza)',
+      category: 'Mort',
+      arabic: 'اللَّهُمَّ اغْفِرْ لَهُ وَارْحَمْهُ وَعَافِهِ وَاعْفُ عَنْهُ',
+      transliteration: "Allahumma ighfir lahu warhamhu wa 'afihi wa'fu 'anhu",
+      translation:
+        'Ô Allah, pardonne-lui, fais-lui miséricorde, accorde-lui le bien-être et efface ses péchés.',
+      reference: 'Muslim',
+      color: '#34495e',
+      image: 'pour-un-mort',
+    },
+    // FAMILLE ET PARENTS
+    {
+      title: 'Pour les parents',
+      category: 'Famille',
+      arabic: 'رَبِّ اغْفِرْ لِي وَلِوَالِدَيَّ',
+      transliteration: 'Rabbi ighfir li wa li walidayy',
+      translation: "Mon Seigneur, pardonne-moi ainsi qu'à mes parents.",
+      reference: 'Coran 17:24',
+      color: '#27ae60',
+      image: 'parents',
+    },
+    {
+      title: 'Pour les parents décédés',
+      category: 'Famille',
+      arabic:
+        'رَبِّ اغْفِرْ لِي وَلِوَالِدَيَّ وَارْحَمْهُمَا كَمَا رَبَّيَانِي صَغِيرًا',
+      transliteration:
+        'Rabbi ighfir li wa li walidayy warhamhuma kama rabbayani saghiran',
+      translation:
+        "Mon Seigneur, pardonne-moi ainsi qu'à mes parents et fais-leur miséricorde comme ils m'ont élevé petit.",
+      reference: 'Coran 17:24',
+      color: '#229954',
+      image: 'parents-decedes',
+    },
+    // MARIAGE
+    {
+      title: 'Doua pour se marier',
+      category: 'Mariage',
+      arabic:
+        'اللَّهُمَّ إِنِّي أَسْأَلُكَ مِنْ خَيْرِهَا وَخَيْرِ مَا جَبَلْتَهَا عَلَيْهِ وَأَعُوذُ بِكَ مِنْ شَرِّهَا وَشَرِّ مَا جَبَلْتَهَا عَلَيْهِ',
+      transliteration:
+        "Allahumma inni as'aluka min khayriha wa khayri ma jabaltaha 'alayh, wa a'udhu bika min sharriha wa sharri ma jabaltaha 'alayh",
+      translation:
+        'Ô Allah, je Te demande le bien qui est en elle et le bien de la nature que Tu lui as donnée, et je cherche refuge auprès de Toi contre le mal qui est en elle et le mal de la nature que Tu lui as donnée.',
+      reference: 'Abou Dawoud',
+      color: '#e91e63',
+      image: 'pour-se-marier',
+    },
+    {
+      title: 'Félicitations pour un mariage',
+      category: 'Mariage',
+      arabic:
+        'بَارَكَ اللهُ لَكَ وَبَارَكَ عَلَيْكَ وَجَمَعَ بَيْنَكُمَا فِي خَيْرٍ',
+      transliteration:
+        "Baraka Allah laka wa baraka 'alayka wa jama'a baynakuma fi khayr",
+      translation:
+        "Qu'Allah te bénisse, qu'Il bénisse pour toi, et qu'Il vous unisse dans le bien.",
+      reference: 'Abou Dawoud, At-Tirmidhi',
+      color: '#ad1457',
+      image: 'felicitations-mariage',
+    },
+    // VOYAGE
+    {
+      title: 'Du voyageur en partant',
+      category: 'Voyage',
+      arabic:
+        'اللَّهُمَّ إِنَّا نَسْأَلُكَ فِي سَفَرِنَا هَذَا الْبِرَّ وَالتَّقْوَى وَمِنَ الْعَمَلِ مَا تَرْضَى',
+      transliteration:
+        "Allahumma inna nas'aluka fi safarina hadha al-birra wat-taqwa wa min al-'amali ma tarda",
+      translation:
+        "Ô Allah, nous Te demandons dans ce voyage la piété, l'obéissance et les œuvres qui T'agréent.",
+      reference: 'At-Tirmidhi',
+      color: '#f39c12',
+      image: 'en-partant',
+    },
+    {
+      title: 'Du voyageur en rentrant',
+      category: 'Voyage',
+      arabic: 'آيِبُونَ تَائِبُونَ عَابِدُونَ لِرَبِّنَا حَامِدُونَ',
+      transliteration: "Ayibun ta'ibun 'abidun li rabbina hamidun",
+      translation:
+        'Nous revenons repentants, adorateurs, louangeant notre Seigneur.',
+      reference: 'Al-Bukhari, Muslim',
+      color: '#e67e22',
+      image: 'en-rentrant',
+    },
+    // VENDREDI
+    {
+      title: 'Doua du vendredi',
+      category: 'Vendredi',
+      arabic: 'اللَّهُمَّ صَلِّ وَسَلِّمْ عَلَى نَبِيِّنَا مُحَمَّدٍ',
+      transliteration: "Allahumma salli wa sallim 'ala nabiyyina Muhammad",
+      translation: 'Ô Allah, prie sur notre Prophète Muhammad et salue-le.',
+      reference: 'Abou Dawoud',
+      color: '#17a2b8',
+      image: 'doua-vendredi',
+    },
+    {
+      title: 'Entre Maghrib et Isha le vendredi',
+      category: 'Vendredi',
+      arabic:
+        'اللَّهُمَّ أَنْتَ السَّلَامُ وَمِنْكَ السَّلَامُ تَبَارَكْتَ يَا ذَا الْجَلَالِ وَالْإِكْرَامِ',
+      transliteration:
+        'Allahumma anta as-salam wa minka as-salam, tabarakta ya dha al-jalali wal-ikram',
+      translation:
+        'Ô Allah, Tu es la Paix et de Toi vient la paix, Tu es béni, ô Détenteur de la Majesté et de la Générosité.',
+      reference: 'Muslim',
+      color: '#138496',
+      image: 'entre-maghrib-isha',
+    },
   ];
 
   for (const duaData of duas) {
