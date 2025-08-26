@@ -12,6 +12,7 @@ import { RecipeCategoryModule } from './recipe-category/recipe-category.module';
 import { RecipeModule } from './recipe/recipe.module';
 import { RecipeFavoritesModule } from './recipe-favorites/recipe-favorites.module';
 import { ContactModule } from './contact/contact.module';
+import { EbookDownloadModule } from './ebook-download/ebook-download.module';
 import { JwtAuthGuard } from './auth/guards/jwt-auth.guard';
 
 @Module({
@@ -30,6 +31,7 @@ import { JwtAuthGuard } from './auth/guards/jwt-auth.guard';
     RecipeModule,
     RecipeFavoritesModule,
     ContactModule,
+    EbookDownloadModule,
   ],
   providers: [
     {

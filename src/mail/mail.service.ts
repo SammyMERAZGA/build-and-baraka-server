@@ -248,6 +248,27 @@ export class MailService {
     `;
   }
 
+  async sendEbookDownloadEmail(email: string): Promise<void> {
+    const htmlContent = this.getEbookDownloadTemplate();
+
+    try {
+      await this.transporter.sendMail({
+        from: this.configService.get('MAIL_FROM'),
+        to: email,
+        subject: '📚 Votre ebook Build & Baraka est prêt !',
+        html: htmlContent,
+      });
+
+      this.logger.log(`Ebook download email sent to ${email}`);
+    } catch (error) {
+      this.logger.error(
+        `Failed to send ebook download email to ${email}`,
+        error,
+      );
+      throw new Error('Failed to send ebook download email');
+    }
+  }
+
   async sendContactNotificationEmail(
     senderEmail: string,
     subject: string,
@@ -378,6 +399,113 @@ export class MailService {
                     Cet email a été généré automatiquement depuis votre site vitrine.
                     <br>
                     Contact original : ${senderEmail}
+                </p>
+            </div>
+        </div>
+    </body>
+    </html>
+    `;
+  }
+
+  private getEbookDownloadTemplate(): string {
+    return `
+    <!DOCTYPE html>
+    <html lang="fr" dir="ltr">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Votre ebook Build & Baraka</title>
+        <style>
+            * { margin: 0; padding: 0; box-sizing: border-box; }
+            body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); padding: 20px; }
+            .container { max-width: 600px; margin: 0 auto; background: white; border-radius: 20px; overflow: hidden; box-shadow: 0 20px 40px rgba(0,0,0,0.1); }
+            .header { background: linear-gradient(135deg, #00a1a7 0%, #008b91 100%); padding: 40px 30px; text-align: center; color: white; }
+            .logo { font-size: 32px; font-weight: bold; margin-bottom: 10px; }
+            .subtitle { font-size: 16px; opacity: 0.9; }
+            .content { padding: 40px 30px; }
+            .greeting { font-size: 24px; color: #00a1a7; margin-bottom: 20px; font-weight: 600; }
+            .message { font-size: 16px; line-height: 1.6; color: #555; margin-bottom: 30px; }
+            .ebook-icon { font-size: 64px; text-align: center; margin: 30px 0; }
+            .download-button { display: inline-block; background: linear-gradient(135deg, #00a1a7 0%, #008b91 100%); color: white; padding: 20px 40px; text-decoration: none; border-radius: 15px; margin: 30px 0; font-weight: 600; font-size: 18px; box-shadow: 0 8px 16px rgba(0, 161, 167, 0.3); transition: transform 0.2s; }
+            .download-button:hover { transform: translateY(-2px); }
+            .ebook-info { background: #e6f7f8; border-left: 4px solid #00a1a7; padding: 20px; margin: 30px 0; border-radius: 0 10px 10px 0; }
+            .footer { background: #f8f9fa; padding: 30px; text-align: center; color: #666; font-size: 14px; }
+            .islamic-decoration { font-size: 24px; color: #00a1a7; margin: 20px 0; }
+            .verse { font-style: italic; color: #00a1a7; margin: 20px 0; padding: 15px; background: #e6f7f8; border-radius: 10px; }
+            .benefits { background: #f8f9fa; padding: 20px; border-radius: 10px; margin: 20px 0; }
+        </style>
+    </head>
+    <body>
+        <div class="container">
+            <div class="header">
+                <div class="logo">🕌 Build & Baraka</div>
+                <div class="subtitle">Votre compagnon spirituel islamique</div>
+            </div>
+            
+            <div class="content">
+                <div class="islamic-decoration">بِسْمِ اللَّهِ الرَّحْمَنِ الرَّحِيم</div>
+                
+                <div class="greeting">As-salāmu ʿalaykum wa-raḥmatu -llāhi wa-barakātuh 🤲</div>
+                
+                <div class="ebook-icon">📚✨</div>
+                
+                <div class="message">
+                    <strong>Barakallahu fik !</strong> Votre ebook Build & Baraka est maintenant disponible au téléchargement.
+                    <br><br>
+                    Cet ebook vous guide pour devenir auto-entrepreneur dans le numérique tout en construisant avec baraka. Découvrez comment allier foi et entrepreneuriat digital !
+                </div>
+                
+                <div style="text-align: center;">
+                    <a href="https://buildbaraka.com/pdf/ebook-buildandbaraka.pdf" class="download-button">
+                        📥 Télécharger l'ebook PDF
+                    </a>
+                </div>
+                
+                <div class="verse">
+                    "Et c'est Lui qui vous a soumis la terre : parcourez donc ses étendues et mangez de Sa subsistance"
+                    <br><strong>- Sourate Al-Mulk (67:15)</strong>
+                </div>
+                
+                <div class="ebook-info">
+                    <strong>📖 À propos de cet ebook :</strong>
+                    <ul style="margin-top: 10px; padding-left: 20px;">
+                        <li>Guide complet pour l'entrepreneuriat numérique halal</li>
+                        <li>Retour d'expérience d'un freelance musulman</li>
+                        <li>Conseils pratiques pour débuter dans le digital</li>
+                        <li>Vision islamique de l'entrepreneuriat moderne</li>
+                    </ul>
+                </div>
+                
+                <div class="benefits">
+                    <strong>🌟 Ce que vous allez découvrir :</strong>
+                    <ul style="margin-top: 10px; padding-left: 20px;">
+                        <li>Comment choisir vos compétences numériques</li>
+                        <li>Créer une offre de service rentable</li>
+                        <li>Trouver et fidéliser vos premiers clients</li>
+                        <li>Mon expérience personnelle de freelance</li>
+                        <li>Travailler partout dans le monde (hijra)</li>
+                        <li>Pourquoi le numérique est l'avenir</li>
+                    </ul>
+                </div>
+                
+                <div class="message">
+                    <strong>💡 Conseil :</strong> Sauvegardez ce lien dans vos favoris pour pouvoir télécharger l'ebook à nouveau si nécessaire.
+                    <br><br>
+                    N'hésitez pas à partager cette ressource avec vos proches qui rêvent d'indépendance financière !
+                    <br><br>
+                    <strong>Qu'Allah vous bénisse dans votre projet entrepreneurial ! 🤲</strong>
+                </div>
+            </div>
+            
+            <div class="footer">
+                <div class="islamic-decoration">☪️ ✨ 🤲</div>
+                <p><strong>Build & Baraka</strong> - Votre compagnon spirituel islamique</p>
+                <p>Que la paix et les bénédictions d'Allah soient sur vous</p>
+                <br>
+                <p style="font-size: 12px; color: #999;">
+                    Vous recevez cet email car vous avez demandé le téléchargement de notre ebook.
+                    <br>
+                    Visitez notre site : <a href="https://buildbaraka.com" style="color: #00a1a7;">buildbaraka.com</a>
                 </p>
             </div>
         </div>
