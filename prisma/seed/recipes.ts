@@ -242,7 +242,22 @@ export async function seedRecipes(prisma: PrismaClient) {
       });
       console.log(`✅ Recette créée: ${recipe.name}`);
     } else {
-      console.log(`ℹ️ Recette existante: ${recipe.name}`);
+      // Mettre à jour la recette existante
+      recipe = await prisma.recipe.update({
+        where: { uuid: recipe.uuid },
+        data: {
+          arabicName: recipeData.arabicName,
+          description: recipeData.description,
+          ingredients: recipeData.ingredients,
+          preparations: recipeData.preparations,
+          hadithSource: recipeData.hadithSource,
+          hadithText: recipeData.hadithText,
+          usage: recipeData.usage,
+          icon: recipeData.icon,
+          recipeCategoryUuid: category.uuid,
+        },
+      });
+      console.log(`🔄 Recette mise à jour: ${recipe.name}`);
     }
   }
 

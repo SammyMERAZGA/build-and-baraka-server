@@ -252,7 +252,20 @@ export async function seedDuas(prisma: PrismaClient) {
       });
       console.log(`✅ Dua créée: ${dua.title}`);
     } else {
-      console.log(`ℹ️ Dua existante: ${dua.title}`);
+      // Mettre à jour le dua existant
+      dua = await prisma.dua.update({
+        where: { uuid: dua.uuid },
+        data: {
+          arabic: duaData.arabic,
+          transliteration: duaData.transliteration,
+          translation: duaData.translation,
+          reference: duaData.reference,
+          color: duaData.color,
+          image: duaData.image,
+          duaCategoryUuid: category.uuid,
+        },
+      });
+      console.log(`🔄 Dua mise à jour: ${dua.title}`);
     }
   }
 
