@@ -37,6 +37,9 @@ async function bootstrap() {
   const allowedOrigins = process.env.ALLOWED_ORIGINS?.split(',') || [
     'https://buildbaraka.com',
     'https://www.buildbaraka.com',
+    'https://www.panel.buildbaraka.com',
+    'https://panel.buildbaraka.com',
+    'http://localhost:3000',
   ];
 
   // Custom CORS middleware
