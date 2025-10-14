@@ -5,3 +5,5 @@ export * from './reset-password.dto';
 export * from './update-profile.dto';
 export * from './user-response.dto';
 export * from './verify-otp.dto';
+export * from './create-admin.dto';
+export * from './admin-response.dto';

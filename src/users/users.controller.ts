@@ -27,6 +27,8 @@ import { ResetPasswordDto } from './dto/reset-password.dto';
 import { UpdateProfileDto, ChangePasswordDto } from './dto/update-profile.dto';
 import { UserResponseDto, LoginResponseDto } from './dto/user-response.dto';
 import { VerifyOtpDto } from './dto/verify-otp.dto';
+import { CreateAdminDto } from './dto/create-admin.dto';
+import { AdminResponseDto } from './dto/admin-response.dto';
 
 @ApiTags('Users & Authentication')
 @Controller('users')
@@ -283,5 +285,66 @@ export class UsersController {
   })
   async deleteAccount(@CurrentUser() user: any): Promise<{ message: string }> {
     return this.usersService.deleteAccount(user.uuid);
+  }
+
+  @Get('all')
+  @ApiBearerAuth()
+  @ApiOperation({
+    summary: 'Get all users',
+    description: 'Retrieve a list of all registered users (admin only)',
+  })
+  @ApiResponse({
+    status: 200,
+    description: 'List of all users',
+    type: [UserResponseDto],
+  })
+  @ApiResponse({
+    status: 401,
+    description: 'Unauthorized - Invalid or missing JWT token',
+  })
+  async getAllUsers(): Promise<UserResponseDto[]> {
+    return this.usersService.getAllUsers();
+  }
+
+  @Get('newsletter-subscribers')
+  @ApiBearerAuth()
+  @ApiOperation({
+    summary: 'Get newsletter subscribers',
+    description: 'Retrieve a list of users who subscribed to the newsletter',
+  })
+  @ApiResponse({
+    status: 200,
+    description: 'List of newsletter subscribers',
+    type: [UserResponseDto],
+  })
+  @ApiResponse({
+    status: 401,
+    description: 'Unauthorized - Invalid or missing JWT token',
+  })
+  async getNewsletterSubscribers(): Promise<UserResponseDto[]> {
+    return this.usersService.getNewsletterSubscribers();
+  }
+
+  @Public()
+  @Post('create-admin')
+  @HttpCode(HttpStatus.CREATED)
+  @ApiOperation({
+    summary: 'Create a new admin',
+    description: 'Create a new administrator account (public route)',
+  })
+  @ApiBody({ type: CreateAdminDto })
+  @ApiResponse({
+    status: 201,
+    description: 'Admin successfully created',
+    type: AdminResponseDto,
+  })
+  @ApiResponse({
+    status: 409,
+    description: 'Conflict - Admin with this username already exists',
+  })
+  async createAdmin(
+    @Body() createAdminDto: CreateAdminDto,
+  ): Promise<AdminResponseDto> {
+    return this.usersService.createAdmin(createAdminDto);
   }
 }

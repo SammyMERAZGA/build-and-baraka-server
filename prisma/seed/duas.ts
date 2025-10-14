@@ -15,7 +15,7 @@ export async function seedDuas(prisma: PrismaClient) {
     { name: 'Vêtements', color: '#e67e22' },
     { name: 'Santé', color: '#e74c3c' },
     { name: 'Épreuves', color: '#8e44ad' },
-    { name: 'Mort', color: '#2c3e50' },
+    { name: 'Décès', color: '#2c3e50' },
     { name: 'Famille', color: '#27ae60' },
     { name: 'Mariage', color: '#e91e63' },
     { name: 'Voyage', color: '#f39c12' },

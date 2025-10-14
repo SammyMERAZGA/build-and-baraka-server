@@ -18,6 +18,8 @@ import { ResetPasswordDto } from './dto/reset-password.dto';
 import { UpdateProfileDto, ChangePasswordDto } from './dto/update-profile.dto';
 import { UserResponseDto, LoginResponseDto } from './dto/user-response.dto';
 import { VerifyOtpDto } from './dto/verify-otp.dto';
+import { CreateAdminDto } from './dto/create-admin.dto';
+import { AdminResponseDto } from './dto/admin-response.dto';
 
 @Injectable()
 export class UsersService {
@@ -332,5 +334,52 @@ export class UsersService {
     });
 
     return { message: 'Le compte a été supprimé avec succès' };
+  }
+
+  async getAllUsers(): Promise<UserResponseDto[]> {
+    const users = await this.prisma.user.findMany({
+      orderBy: { createdAt: 'desc' },
+    });
+
+    return users.map((user) => new UserResponseDto(user));
+  }
+
+  async getNewsletterSubscribers(): Promise<UserResponseDto[]> {
+    const subscribers = await this.prisma.user.findMany({
+      where: { newsletterSubscribed: true },
+      orderBy: { createdAt: 'desc' },
+    });
+
+    return subscribers.map((user) => new UserResponseDto(user));
+  }
+
+  async createAdmin(createAdminDto: CreateAdminDto): Promise<AdminResponseDto> {
+    const { username, password, description } = createAdminDto;
+
+    // Check if admin with this username already exists
+    const existingAdmin = await this.prisma.admin.findUnique({
+      where: { username },
+    });
+
+    if (existingAdmin) {
+      throw new ConflictException(
+        "Un administrateur avec ce nom d'utilisateur existe déjà",
+      );
+    }
+
+    // Hash password
+    const saltRounds = 12;
+    const hashedPassword = await bcrypt.hash(password, saltRounds);
+
+    // Create admin
+    const admin = await this.prisma.admin.create({
+      data: {
+        username,
+        password: hashedPassword,
+        description,
+      },
+    });
+
+    return new AdminResponseDto(admin);
   }
 }

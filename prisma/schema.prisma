@@ -184,12 +184,21 @@ model EbookDownload {
 }
 
 model Link {
-  uuid String @id @default(uuid())
-  url  String @unique @db.Text
-  name String
-  description String? @db.Text
-  createdAt DateTime @default(now()) @map("created_at")
-  updatedAt DateTime @updatedAt @map("updated_at")
+  uuid        String   @id @default(uuid())
+  url         String   @unique @db.Text
+  name        String
+  description String?  @db.Text
+  createdAt   DateTime @default(now()) @map("created_at")
+  updatedAt   DateTime @updatedAt @map("updated_at")
 
   @@map("link")
+}
+
+model Admin {
+  uuid        String   @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  username    String   @unique @db.VarChar(50)
+  password    String
+  description String?  @db.Text
+  createdAt   DateTime @default(now()) @map("created_at")
+  updatedAt   DateTime @default(now()) @updatedAt @map("updated_at")
 }
