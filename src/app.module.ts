@@ -14,6 +14,7 @@ import { RecipeFavoritesModule } from './recipe-favorites/recipe-favorites.modul
 import { ContactModule } from './contact/contact.module';
 import { EbookDownloadModule } from './ebook-download/ebook-download.module';
 import { LinkModule } from './link/link.module';
+import { AdminModule } from './admin/admin.module';
 import { JwtAuthGuard } from './auth/guards/jwt-auth.guard';
 
 @Module({
@@ -34,6 +35,7 @@ import { JwtAuthGuard } from './auth/guards/jwt-auth.guard';
     ContactModule,
     EbookDownloadModule,
     LinkModule,
+    AdminModule,
   ],
   providers: [
     {

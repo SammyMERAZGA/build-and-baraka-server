@@ -1,0 +1,48 @@
+### Test de l'API Admin
+
+# Connexion admin
+POST http://localhost:4001/admin/login
+Content-Type: application/json
+
+{
+  "username": "admin",
+  "password": "password123"
+}
+
+###
+
+# Test avec des identifiants invalides
+POST http://localhost:4001/admin/login
+Content-Type: application/json
+
+{
+  "username": "wronguser",
+  "password": "wrongpass"
+}
+
+###
+
+# Récupérer le profil admin (remplace TOKEN par le token reçu)
+GET http://localhost:4001/admin/profile
+Authorization: Bearer TOKEN
+
+###
+
+# Test de validation - username manquant
+POST http://localhost:4001/admin/login
+Content-Type: application/json
+
+{
+  "password": "password123"
+}
+
+###
+
+# Test de validation - mot de passe trop court
+POST http://localhost:4001/admin/login
+Content-Type: application/json
+
+{
+  "username": "admin",
+  "password": "123"
+}
